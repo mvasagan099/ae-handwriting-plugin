@@ -19,6 +19,7 @@ export interface FontOption {
   label: string;
   url: string;
   style: 'cursive' | 'print' | 'calligraphy';
+  group?: string;
 }
 
 export const AVAILABLE_FONTS: FontOption[] = [
@@ -187,6 +188,41 @@ export const AVAILABLE_FONTS: FontOption[] = [
     id: 'CalifornianSignature-7OKLw',
     label: 'Californian Signature',
     url: 'assets/fonts/CalifornianSignature-7OKLw.otf',
+    style: 'cursive',
+    group: 'Single Line Fonts',
+  },
+  {
+    id: 'OceanTrace',
+    label: 'Ocean Trace',
+    url: 'assets/fonts/OceanTrace.ttf',
+    style: 'cursive',
+    group: 'Single Line Fonts',
+  },
+  {
+    id: 'CalifornianSignature-clean',
+    label: 'Californian Signature (Clean)',
+    url: 'assets/fonts/Californian Signature.otf',
+    style: 'cursive',
+    group: 'Single Line Fonts',
+  },
+  {
+    id: 'GatewaySignature',
+    label: 'Gateway Signature',
+    url: 'assets/fonts/Gateway Signature.ttf',
+    style: 'cursive',
+    group: 'Single Line Fonts',
+  },
+  {
+    id: 'FeasiblySingleLine',
+    label: 'Feasibly Single Line',
+    url: 'assets/fonts/FeasiblySingleLine-z8D90.ttf',
+    style: 'cursive',
+    group: 'Single Line Fonts',
+  },
+  {
+    id: 'AuditoryPerceptionSingleLine',
+    label: 'Auditory Perception Single Line',
+    url: 'assets/fonts/AuditoryPerceptionSingleLine-RpELl.ttf',
     style: 'cursive',
     group: 'Single Line Fonts',
   },

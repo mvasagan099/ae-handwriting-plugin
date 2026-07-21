@@ -385,34 +385,43 @@ export async function generateAnimatedSvg(options: GeneratorOptions): Promise<st
       (layer.opacity.keyframes[1]?.value ?? layer.opacity.keyframes[0]?.value ?? 100) / 100
     );
 
-    // ── Animated Mask (The Hack) ──────────────────────────────────────────────
-    // We create a very thick, white stroke that traces the font outline.
-    // Because it is thick, it covers the letter shape. 
-    // We animate its dashoffset, effectively acting as a reveal mask.
-    const maskStrokeWidth = 30; // Reduced to 30 so it actually "writes" instead of instantly popping in
-    
-    defsElements.push(
-      `<mask id="${maskId}">` +
-        `<path pathLength="1"` +
-        ` style="stroke-dasharray:1;stroke-dashoffset:1;animation:drawStroke ${duration.toFixed(3)}s ease-in-out ${startTime.toFixed(3)}s both;"` +
-        ` d="${layer.pathData}"` +
-        ` fill="none" stroke="white" stroke-width="${maskStrokeWidth}" stroke-linecap="round" stroke-linejoin="round"/>` +
-      `</mask>`
-    );
+    if (options.settings.filledText) {
+      // ── Animated Mask (The Hack for Outline Fonts) ─────────────────────────
+      const maskStrokeWidth = 30; 
+      
+      defsElements.push(
+        `<mask id="${maskId}">` +
+          `<path pathLength="1"` +
+          ` style="stroke-dasharray:1;stroke-dashoffset:1;animation:drawStroke ${duration.toFixed(3)}s ease-in-out ${startTime.toFixed(3)}s both;"` +
+          ` d="${layer.pathData}"` +
+          ` fill="none" stroke="white" stroke-width="${maskStrokeWidth}" stroke-linecap="round" stroke-linejoin="round"/>` +
+        `</mask>`
+      );
 
-    // ── Solid Visible Path ────────────────────────────────────────────────────
-    // This is the actual visible letter. It is fully filled and stroked.
-    // We apply the mask to it, so it appears to draw on as a solid block of ink!
-    pathElements.push(
-      `<path id="${pathId}"` +
-      ` d="${layer.pathData}"` +
-      ` fill="${layer.strokeColor}" stroke="${layer.strokeColor}"` +
-      ` stroke-width="${strokeWidth.toFixed(2)}"` +
-      ` stroke-linecap="${layer.lineCap || 'round'}"` +
-      ` stroke-linejoin="${layer.lineJoin || 'round'}"` +
-      ` opacity="${opacity.toFixed(2)}"` +
-      ` mask="url(#${maskId})"/>`
-    );
+      pathElements.push(
+        `<path id="${pathId}"` +
+        ` d="${layer.pathData}"` +
+        ` fill="${layer.strokeColor}" stroke="${layer.strokeColor}"` +
+        ` stroke-width="${strokeWidth.toFixed(2)}"` +
+        ` stroke-linecap="${layer.lineCap || 'round'}"` +
+        ` stroke-linejoin="${layer.lineJoin || 'round'}"` +
+        ` opacity="${opacity.toFixed(2)}"` +
+        ` mask="url(#${maskId})"/>`
+      );
+    } else {
+      // ── True Single Line (Standard Path Tracing) ───────────────────────────
+      pathElements.push(
+        `<path id="${pathId}"` +
+        ` style="stroke-dasharray:1;stroke-dashoffset:1;animation:drawStroke ${duration.toFixed(3)}s ease-in-out ${startTime.toFixed(3)}s both;"` +
+        ` pathLength="1"` +
+        ` d="${layer.pathData}"` +
+        ` fill="none" stroke="${layer.strokeColor}"` +
+        ` stroke-width="${strokeWidth.toFixed(2)}"` +
+        ` stroke-linecap="${layer.lineCap || 'round'}"` +
+        ` stroke-linejoin="${layer.lineJoin || 'round'}"` +
+        ` opacity="${opacity.toFixed(2)}"/>`
+      );
+    }
 
     // ── Pen cursor for this stroke ────────────────────────────────────────────
     if (showPen) {
