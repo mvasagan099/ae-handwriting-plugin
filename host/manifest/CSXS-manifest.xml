@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Adobe CEP Manifest
+  Plugin: Handwriting Animation Engine
+  Compatible: After Effects CC 2019+ (16.0+)
+-->
+<ExtensionManifest
+  ExtensionBundleId="com.handwriting.plugin"
+  ExtensionBundleName="Handwriting Animation"
+  ExtensionBundleVersion="1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <ExtensionList>
+    <Extension Id="com.handwriting.plugin.panel" Version="1.0.0" />
+  </ExtensionList>
+
+  <ExecutionEnvironment>
+    <HostList>
+      <!-- After Effects CC 2019 = 16.0 -->
+      <Host Name="AEFT" Version="[16.0,99.9]" />
+    </HostList>
+
+    <LocaleList>
+      <Locale Code="All" />
+    </LocaleList>
+
+    <RequiredRuntimeList>
+      <RequiredRuntime Name="CSXS" Version="9.0" />
+    </RequiredRuntimeList>
+  </ExecutionEnvironment>
+
+  <DispatchInfoList>
+    <Extension Id="com.handwriting.plugin.panel">
+      <DispatchInfo>
+        <Resources>
+          <MainPath>./index.html</MainPath>
+          <ScriptPath>./host/scripts/handwriting.jsx</ScriptPath>
+          <CEFCommandLine>
+            <Parameter>--enable-nodejs</Parameter>
+            <Parameter>--mixed-context</Parameter>
+          </CEFCommandLine>
+        </Resources>
+        <Lifecycle>
+          <AutoVisible>true</AutoVisible>
+          <StartOn>
+            <Event>applicationActivate</Event>
+          </StartOn>
+        </Lifecycle>
+        <UI>
+          <Type>Panel</Type>
+          <Menu>Handwriting Animation</Menu>
+          <Geometry>
+            <Size>
+              <Height>680</Height>
+              <Width>320</Width>
+            </Size>
+            <MinSize>
+              <Height>500</Height>
+              <Width>280</Width>
+            </MinSize>
+            <MaxSize>
+              <Height>900</Height>
+              <Width>400</Width>
+            </MaxSize>
+          </Geometry>
+          <Icons>
+            <Icon Type="Normal">./assets/icons/icon_32.png</Icon>
+            <Icon Type="RollOver">./assets/icons/icon_32.png</Icon>
+            <Icon Type="DarkNormal">./assets/icons/icon_32_dark.png</Icon>
+            <Icon Type="DarkRollOver">./assets/icons/icon_32_dark.png</Icon>
+          </Icons>
+        </UI>
+      </DispatchInfo>
+    </Extension>
+  </DispatchInfoList>
+
+</ExtensionManifest>

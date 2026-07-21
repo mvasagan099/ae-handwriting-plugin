@@ -1,0 +1,29 @@
+{
+  "name": "ae-handwriting-plugin",
+  "version": "1.0.0",
+  "description": "AI Handwriting Animation Plugin for Adobe After Effects",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build:plugin": "npm run build && node scripts/package-plugin.js"
+  },
+  "dependencies": {
+    "bezier-js": "^6.1.4",
+    "opentype.js": "^1.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/opentype.js": "^1.3.10",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.3.9"
+  }
+}
