@@ -37,7 +37,7 @@ export function PluginPanel() {
     description: p.description,
   }));
 
-  const fontOptions = fonts.map((f) => ({ value: f.id, label: f.label }));
+  const fontOptions = fonts.map((f) => ({ value: f.id, label: f.label, group: f.group }));
 
   const penOptions: { value: PenType; label: string; icon: string; desc: string }[] = [
     { value: 'fountain', label: 'Fountain', icon: '🖊', desc: 'Fine ink lines' },

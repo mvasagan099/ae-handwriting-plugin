@@ -130,6 +130,14 @@ export interface AnimatedProperty {
   keyframes: Keyframe[];
 }
 
+export interface Font {
+  id: string;
+  label: string;
+  url: string;
+  style: string;
+  group?: string;
+}
+
 export interface ShapeLayerData {
   id: string;
   name: string;
